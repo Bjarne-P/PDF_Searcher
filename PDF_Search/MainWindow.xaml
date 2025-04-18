@@ -7,11 +7,22 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid Margin="0,0,0,-6">
-        <TextBox x:Name="TBWord" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Word" VerticalAlignment="Top" Width="143" Height="26"/>
-        <TextBox x:Name="TBPath" HorizontalAlignment="Left" Margin="177,10,0,0" TextWrapping="Wrap" Text="FilePath" VerticalAlignment="Top" Width="470" Height="26" MouseDoubleClick="TBPath_DoubleClick"/>
-        <Button  Content="Start Search" HorizontalAlignment="Left" Margin="668,13,0,0" VerticalAlignment="Top" Click="Button_Click" Width="94"/>
-        <ListBox x:Name="LBPaths" Margin="10,61,10,49" MouseDoubleClick="LBPaths_DoubleClick"/>
-        <ProgressBar Name="Progressbar" Margin="10,396,10,10" Value="0" Visibility="Visible"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
 
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="80"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBox x:Name="TBWord" HorizontalAlignment="Stretch" Margin="10,10,0,0" TextWrapping="Wrap" Text="Word" VerticalAlignment="Top" Height="26" Grid.Row="0" Grid.Column="0"/>
+        <TextBox x:Name="TBPath" HorizontalAlignment="Stretch" Margin="10,10,0,0" TextWrapping="Wrap" Text="FilePath" VerticalAlignment="Top" Height="26" MouseDoubleClick="TBPath_DoubleClick" Grid.Row="0" Grid.Column="1"/>
+        <Button Content="Start Search" HorizontalAlignment="Stretch" Margin="10,10,10,0" VerticalAlignment="Center" Click="Button_Click" Grid.Row="0" Grid.Column="2"/>
+        <ListBox x:Name="LBPaths" Margin="10,10,10,10" MouseDoubleClick="LBPaths_DoubleClick" Grid.Row="1" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        <ProgressBar Name="Progressbar" Margin="10,10,10,10" Value="0" Visibility="Visible" Grid.Row="2" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" Height="20"/>
     </Grid>
 </Window>

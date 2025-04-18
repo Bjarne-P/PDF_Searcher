@@ -20,6 +20,7 @@ using UglyToad.PdfPig.Content;
 using UglyToad.PdfPig.Parser.Parts;
 using Page = UglyToad.PdfPig.Content.Page;
 using System.Diagnostics;
+using System.Threading;
 
 namespace PDF_Search
 {
@@ -31,15 +32,19 @@ namespace PDF_Search
         public MainWindow()
         {
             InitializeComponent();
-            //FindWord("C:/Users/bjarn/Documents/maria/time_series_analysis_precipitation.pdf", "rain");
-            //FindWordInFolder("C:/Users/bjarn/Documents/maria/", "rain");
         }
 
         public async Task<List<string>> FindWordInFolder(string directoryPath, string wordToFind)
-        {
+        {   
+            string[] pathArray = [];
             return await Task.Run(() =>
             {
-                string[] pathArray = Directory.GetFiles(directoryPath, "*.pdf");
+                try { 
+                    pathArray = Directory.GetFiles(directoryPath, "*.pdf");
+                }catch (Exception e) {
+                    MessageBox.Show("Irregular Filepath", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+
                 List<string> filesWithWord = new List<string>();
 
                 foreach (string path in pathArray)
@@ -53,6 +58,9 @@ namespace PDF_Search
                     {
                         Progressbar.Maximum = pathArray.Length;
                         Progressbar.Value += 1;
+                        if (Progressbar.Value == pathArray.Length){
+                            Progressbar.Value = 0;
+                        }
                     });
                 }
 
